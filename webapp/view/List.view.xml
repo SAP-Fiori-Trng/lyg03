@@ -1,0 +1,78 @@
+<mvc:View
+    controllerName="dw.fiori.trng.lyg03.controller.List"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns="sap.m">
+    <f:DynamicPage
+        headerExpanded="{= !${device>/system/phone}}"
+        showFooter="true"
+        fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>appTitle}" />
+                    <!-- <svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" /> -->
+                </f:heading>
+                <!-- <f:expandedContent>
+						<Label id="expandedLabel" text="No filters active" />
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label id="snappedLabel" text="No filters active" />
+					</f:snappedContent> -->
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search="onSearch"
+                        filterChange="onFilterChange">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                name="ID"
+                                label="Product Name"
+                                groupName="Group1"
+                                visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiComboBox
+                                        name="ProductName"
+                                        selectionChange="onSelectionChange"
+                                        items="{
+												path: '/Products',
+												templateShareable: true
+											}">
+                                        <core:Item
+                                            key="{ID}"
+                                            text="{Name}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <core:Fragment
+                fragmentName="dw.fiori.trng.lyg03.fragment.ProductResTable"
+                type="XML" />
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <core:Fragment
+                    fragmentName="dw.fiori.trng.lyg03.fragment.NewBtn"
+                    type="XML"
+                />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

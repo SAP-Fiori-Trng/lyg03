@@ -1,0 +1,32 @@
+<c:FragmentDefinition xmlns="sap.m" xmlns:c="sap.ui.core">
+    <Dialog
+      title ="{viewModel>/editDialogTitle}"
+      contentHeight="12rem"
+      contentWidth="24rem"
+      resizable="true"
+      draggable="true"
+      beforeOpen="onDialogEditBeforeOpen">
+      <content>
+        <VBox class="sapUiSmallMargin">
+            <Label text="Rating" labelFor="idRatingInput"/>
+            <Input class="sapUiSmallMarginEnd" id="idRatingInput"
+              value="{Rating}"
+              valueLiveUpdate="true"
+              valueStateText="{i18n>qtyInStockValidTxt}"
+              change="onUnitsInStockInputChange"
+              width="100%"
+              required="true" />
+        </VBox>
+      </content>
+      <beginButton>
+        <Button type="Accept"
+            text="{i18n>dialogSubmitButtonText}"
+            press="onSubmitStockQtyPress"/>
+      </beginButton>
+      <endButton>
+         <Button
+            text="{i18n>dialogCloseButtonText}"
+            press="onCloseButtonPress"/>
+      </endButton>
+   </Dialog>
+</c:FragmentDefinition>

@@ -1,0 +1,122 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core">
+	<Table
+		id="idProductsList"
+		class="sapUiResponsiveMargin"
+		width="auto"
+		growing="true" growingThreshold="10"
+		mode="MultiSelect"
+		selectionChange="onProductsListSelectionChange"
+		items="{
+			path: '/Products',
+            parameters: {
+                expand: 'Category,Supplier',
+                select: 'Name,ID,Description,ReleaseDate,DiscontinuedDate,Rating,Price,Category/Name,Supplier/Name',
+                operationMode: 'Server',
+                countMode: 'Inline'
+            }
+		}">
+		<headerToolbar>
+			<Toolbar>
+				<Title text="{i18n>productListTitle}" />
+				<ToolbarSpacer />
+				<SearchField
+					width="16%"
+					search=".onFilterProducts"/>
+				<Button text="Create" press="onCreateButtonPress"></Button>
+				<Button text="Delete" enabled="{=${viewModel>/selectedItems}.length > 0}"
+					press="onDeleteButtonPress"></Button>
+				<Button icon="sap-icon://request" enabled="{viewModel>/editBtnState}"
+					tooltip="{i18n>editBtnTooltip}" press="onEditButtonPress"></Button>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="15em">
+				<Text text="{i18n>productNameText}" />
+			</Column>
+			<Column
+				hAlign="End"
+				minScreenWidth="Small"
+				demandPopin="true">
+				<Text text="{i18n>productIDText}" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Category Name" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Supplier" />
+			</Column>
+			<Column>
+				<Text text="{i18n>unitPriceText}" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Rating" />
+			</Column>
+			<Column hAlign="End"
+				minScreenWidth="Small"
+				demandPopin="false">
+				<Text text="Description" />
+			</Column>
+			<Column hAlign="Center">
+				<Text text="Discontinued Date" />
+			</Column>
+			<Column hAlign="Center">
+				<Text text="Release Date" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Navigation" 
+				press="onColumnListItemPress">
+				<cells>
+					<Text text="{Name}" />
+					<Text text="{ID}" />
+					<Text text="{Category/Name}" />
+					<Text text="{Supplier/Name}" />
+					<ObjectNumber
+						number="{
+							parts:[{path:'Price'}, {path:'viewModel>/Unit'}],
+							type:'sap.ui.model.type.Currency',
+							formatOptions:{
+								showMeasure: true,
+								preserveDecimals: false,
+								decimals: 1,
+								groupingSeparator: ',',
+								decimalSeparator: '.'
+							}
+						}"
+						state="{=${Price} >= 20 ? 'Success' : 'Error'}"/>
+					<ObjectNumber
+						number="{Rating}"
+						emphasized="false"/>
+					<Text
+						text="{Description}"/>
+					<Text
+						text="{
+							path: 'DiscontinuedDate',
+							type: 'sap.ui.model.type.DateTime',
+							formatOptions: {
+								pattern: 'yyyy/MM/dd HH:mm:ss'
+							}
+						}"/>
+					<Text
+						text="{
+							path: 'ReleaseDate',
+							type: 'sap.ui.model.type.DateTime',
+							formatOptions: {
+								pattern: 'yyyy/MM/dd HH:mm:ss'
+							}
+						}"/>
+					<Button icon="sap-icon://write-new-document" type="Accept"
+						press="onRowButtonPress"></Button>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</c:FragmentDefinition>

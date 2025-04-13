@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: dw.fiori.trng.lyg03
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://dlces1024.accenturechina.com:50000
+          client: '100'
+        app:
+          name: ZDW_PRD_MGMT01
+          description: Products Management for Testing
+          package: ZSAP_DUFL_TRNG
+          transport: S4HK902728
+        exclude:
+          - /test/

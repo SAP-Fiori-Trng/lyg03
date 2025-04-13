@@ -1,0 +1,127 @@
+{
+    "_version": "1.60.0",
+    "sap.app": {
+        "id": "dw.fiori.trng.lyg03",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.16.5",
+            "toolsId": "52fe2c87-4e1e-4b37-b0bb-3914614b22e7"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/V2/(S(ypxwnv5v0t3yychdvlj2y3xf))/OData/OData.svc/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "fullWidth": true,
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "dw.fiori.trng.lyg03.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "transition": "slide",
+                "type": "View",
+                "viewType": "XML",
+                "path": "dw.fiori.trng.lyg03.view",
+                "async": true,
+                "viewPath": "dw.fiori.trng.lyg03.view"
+            },
+            "routes": [
+                {
+                    "name": "List",
+                    "pattern": ":?query:",
+                    "target": [
+                        "ListPage"
+                    ]
+                },
+				{
+					"pattern": "detail/{ProductID}",
+					"name": "Detail",
+					"target": "Detail"
+				}
+            ],
+            "targets": {
+                "ListPage": {
+                    "id": "list",
+                    "name": "List",
+					"viewType": "XML"
+                },
+				"Detail": {
+                    "id": "detail",
+					"name": "Detail",
+					"viewType": "XML"
+				}
+            }
+        },
+        "rootView": {
+            "viewName": "dw.fiori.trng.lyg03.view.App",
+            "type": "XML",
+            "id": "App"
+        }
+    }
+}
